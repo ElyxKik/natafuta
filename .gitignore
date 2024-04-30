@@ -14,6 +14,8 @@ __pycache__
 media/
 static/
 theme/
+**/migrations/
+
 *.json
 # Ignore les fichiers de données de base de données
 *.sqlite3
