@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <div>
+        <h6 class="font-medium text-lg mt-6 mb-2">Avis de Recherche</h6>
+        <div class="grid grid-cols-3 gap-2">
+            {% for a in avis reversed %}
+            <a href="{% url 'avis_detail' a.id %}">
+                <div class="flex flex-col bg-white border border-gray-200 rounded-lg shadow w-80 hover:bg-blue-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                    <div class="flex flex-row space-x-2">
+                        {% if a.photo %}
+                            <img src="{{ a.photo.url }}" style="width:140px; height:140px" class="w-28 bg-gray-400 rounded-l-lg"/>
+                        {% else %}
+                            <img src="{% static 'img/blank-profile.jpg' %}" style="width:140px; height:140px" alt="photo_disparu" />
+                        {% endif %}
+                        <div class="my-4">
+                            <p class="font-semibold text-base">{{a.nom_disparu}}</p>
+                            <div class="flex flex-col">
+                                <div class="text-sm"><span class="font-medium">Age</span> : {{a.age}} ans</div>
+                                <div class="text-sm"><span class="font-medium">Origine</span> : {{a.lieu_disparition}}</div>
+                                <div class="text-sm"><span class="font-medium">Disparu</span> le {{a.date_disparition}}</div>
+                                <div class="text-xs text-right mt-2">Publié le {{a.created_time}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% empty %}
+                <p>Aucun avis de recherche pour le moment</p>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

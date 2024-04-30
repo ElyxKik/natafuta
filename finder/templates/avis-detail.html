@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="mx-auto max-w-3xl">
+    <h1 class="text-center text-2xl font-bold mb-10">Avis de Recherche</h1>
+
+    <div>
+        <h4 class="font-medium text-lg w-full bg-slate-300 p-2 mb-2">Detail du disparu</h4>
+        <div class="flex flex-row space-x-4">
+            {% if avis.photo %}
+                <img src="{{ avis.photo.url }}" style="width:160px; height:160px;" class="border border-gray-100 rounded-lg"/>
+            {% else %}
+                <img src="{% static 'img/blank-profile.jpg' %}" style="width:160px; height:160px" class="rounded" alt="photo_disparu" />
+            {% endif %}
+            <div>
+                <h5><span class="font-medium text-sm">Nom</span> : <span class="font-normal text-gray-600">{{avis.nom_disparu}}</span></h3>
+                <div class="grid grid-cols-2 gap-x-32 text-sm">
+                    <p><span class="font-medium">Age</span> : <span class="font-normal text-gray-600">{{avis.age}} ans</span></p>
+                    <p><span class="font-medium">Sexe</span> : <span class="font-normal text-gray-600">{{avis.sexe}}</span></p>
+                    <p><span class="font-medium">Lieu de disparition</span> : <span class="font-normal text-gray-600">{{avis.lieu_disparition}}</span></p>
+                    <p><span class="font-medium">Province</span> : <span class="font-normal text-gray-600">{{avis.province}}</span></p>
+                    <p><span class="font-medium">Status</span> : <span class="font-normal text-gray-600">{% if avis.is_finded == True %}Retrouvé{% else %}En cour de recherche{%endif%}</span></p>
+                </div>
+                <div class="my-2">
+                    <h6 class="font-medium text-sm">Description : </h6>
+                    <p><span class="font-normal text-gray-600 text-sm">{{avis.description}}</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="my-4">
+            <h4 class="font-medium text-lg w-full bg-slate-300 p-2 mb-2">Personne à contacter</h4>
+            <div class="grid grid-cols-2 gap-x-10 text-sm">
+                <p><span class="font-medium">Nom</span> : <span class="font-normal text-gray-600">{{avis.nom_complet}}</span></p>
+                <p><span class="font-medium">Telephone</span> : <span class="font-normal text-gray-600">{{avis.telephone}}</span></p>
+                <p><span class="font-medium">Adresse</span> : <span class="font-normal text-gray-600">{{avis.adresse}}</span></p>
+            </div>
+        </div>
+        {% if avis.is_finded == False and user.is_authenticated %}
+        <div class="flex justify-center my-2">
+            <a href="{% url 'personne_retrouve' avis.id %}">
+                <button class="bg-green-500 p-2 rounded-lg text-white flex">Retrouvé</button>
+            </a>
+        </div>
+        {% endif %}
+    </div>
+    <div class="my-10">
+        <h3 class="font-semibold text-lg">Avis similaire</h3>
+        <div class="grid grid-cols-2 gap-2">
+            {% for a in avis_similaire reversed %}
+            <a href="{% url 'avis_detail' a.id %}">
+                <div class="flex flex-col bg-white border border-gray-200 rounded-lg pr-2 shadow w-82 hover:bg-blue-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                    <div class="flex flex-row space-x-2">
+                        {% if a.photo %}
+                            <img src="{{ a.photo.url }}" style="width:140px; height:140px" class="w-28 bg-gray-400 rounded-l-lg"/>
+                        {% else %}
+                            <img src="{% static 'img/blank-profile.jpg' %}" style="width:140px; height:140px" alt="photo_disparu" />
+                        {% endif %}
+                        <div class="my-4">
+                            <p class="font-semibold text-base">{{a.nom_disparu}}</p>
+                            <div class="flex flex-col">
+                                <div class="text-sm"><span class="font-medium">Age</span> : {{a.age}} ans</div>
+                                <div class="text-sm"><span class="font-medium">Origine</span> : {{a.lieu_disparition}}, {{a.province}}</div>
+                                <div class="text-sm"><span class="font-medium">Disparu</span> le {{a.date_disparition}}</div>
+                                <div class="text-xs text-right mt-2">{{a.created_time}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            {% empty %}
+                <p>Aucun avis de recherche similaire</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
