@@ -1,7 +1,10 @@
 from django.db import models
-from account.models import AgentUser
 from django.db.models.deletion import CASCADE
-# Create your models here.
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+
+from PIL import Image
+from account.models import AgentUser
 
 
 class Avis(models.Model):
@@ -20,6 +23,13 @@ class Avis(models.Model):
     date_finded = models.DateField(null=True)
     created_time = models.DateTimeField(auto_now=True)
     is_finded = models.BooleanField(default=False)
+
+@receiver(pre_save, sender=Avis)
+def resize_image(sender, instance, **kwargs):
+    if instance.photo:
+        img = Image.open(instance.photo)
+        img.thumbnail((500, 500), Image.ANTIALIAS)
+        img.save(instance.photo.path)
 
 
 
