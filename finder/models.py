@@ -23,6 +23,8 @@ class Avis(models.Model):
     date_finded = models.DateField(null=True)
     created_time = models.DateTimeField(auto_now=True)
     is_finded = models.BooleanField(default=False)
+    is_refugee = models.BooleanField(default=False)
+    is_deplacee = models.BooleanField(default=False)
 
 @receiver(pre_save, sender=Avis)
 def resize_image(sender, instance, **kwargs):

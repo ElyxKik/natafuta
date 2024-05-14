@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="mx-auto max-w-3xl">
-    <h1 class="text-center text-2xl font-bold mb-10">Avis de Recherche</h1>
+    <h1 class="text-center text-2xl md:text-4xl font-bold mb-10">Avis de Recherche</h1>
 
     <div>
         <h4 class="font-medium text-lg w-full bg-slate-300 p-2 mb-2">Detail du disparu</h4>
@@ -15,7 +15,7 @@
             {% endif %}
             <div>
                 <h5><span class="font-medium text-sm">Nom</span> : <span class="font-normal text-gray-600">{{avis.nom_disparu}}</span></h3>
-                <div class="grid grid-cols-2 gap-x-32 text-sm">
+                <div class="flex flex-col lg:grid lg:grid-cols-2 gap-x-32 text-sm">
                     <p><span class="font-medium">Age</span> : <span class="font-normal text-gray-600">{{avis.age}} ans</span></p>
                     <p><span class="font-medium">Sexe</span> : <span class="font-normal text-gray-600">{{avis.sexe}}</span></p>
                     <p><span class="font-medium">Lieu de disparition</span> : <span class="font-normal text-gray-600">{{avis.lieu_disparition}}</span></p>
@@ -30,7 +30,7 @@
         </div>
         <div class="my-4">
             <h4 class="font-medium text-lg w-full bg-slate-300 p-2 mb-2">Personne à contacter</h4>
-            <div class="grid grid-cols-2 gap-x-10 text-sm">
+            <div class="flex flex-col lg:grid lg:grid-cols-2 gap-x-10 text-sm">
                 <p><span class="font-medium">Nom</span> : <span class="font-normal text-gray-600">{{avis.nom_complet}}</span></p>
                 <p><span class="font-medium">Telephone</span> : <span class="font-normal text-gray-600">{{avis.telephone}}</span></p>
                 <p><span class="font-medium">Adresse</span> : <span class="font-normal text-gray-600">{{avis.adresse}}</span></p>
@@ -46,7 +46,7 @@
     </div>
     <div class="my-10">
         <h3 class="font-semibold text-lg">Avis similaire</h3>
-        <div class="grid grid-cols-2 gap-2">
+        <div class="flex flex-col lg:grid lg:grid-cols-2 gap-2">
             {% for a in avis_similaire reversed %}
             <a href="{% url 'avis_detail' a.id %}">
                 <div class="flex flex-col bg-white border border-gray-200 rounded-lg pr-2 shadow w-82 hover:bg-blue-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">

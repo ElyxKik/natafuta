@@ -87,3 +87,4 @@ def new_avis(request):
                                    )
         avis.save()
         return redirect('home')
+    

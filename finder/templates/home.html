@@ -4,7 +4,7 @@
 
     <div class="w-full">
         
-        <div class="grid grid-cols-4 gap-5">
+        <div class="md:grid  md:grid-cols-4 grid-cols-1 py-2 md:gap-5 gap-y-2">
             <a href="{% url 'avis_recherche' %}">
                 <div class="flex flex-row border border-gray-200 hover:bg-blue-100 rounded-lg justify-around py-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" class="text-gray-500" fill="currentColor" class="bi bi-person-exclamation" viewBox="0 0 16 16">
@@ -50,11 +50,11 @@
         </div>
         
         
-        <h6 class="font-medium text-lg mt-6 mb-2">Avis de Recherche Récents</h6>
-        <div class="flex flex-row space-x-3">
+        <h6 class="font-medium text-xl mt-6 mb-2">Avis de Recherche Récents</h6>
+        <div class="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-3 ">
             {% for a in avis %}
             <a href="{% url 'avis_detail' a.id %}">
-                <div class="flex flex-col bg-white border border-gray-200 rounded-lg shadow w-80 hover:bg-blue-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                <div class="flex flex-col bg-white border border-gray-200 rounded-lg shadow w-full md:w-80 hover:bg-blue-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                     <div class="flex flex-row space-x-2">
                         {% if a.photo %}
                             <img src="{{ a.photo.url }}" style="width:140px; height:140px" class="w-28 bg-gray-400 rounded-l-lg"/>
@@ -77,11 +77,11 @@
                 <p class="font-light text-sm">Aucun avis de recherche pour le moment</p>
             {% endfor %}
         </div>
-        <h6 class="font-medium text-lg mt-6 mb-2">Personne Retrouvé</h6>
-        <div class="flex flex-row space-x-3">
+        <h6 class="font-medium text-xl mt-6 mb-2">Personne Retrouvé</h6>
+        <div class="flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-3 ">
             {% for a in avis_resolu reversed %}
             <a href="{% url 'avis_detail' a.id %}">
-                <div class="flex flex-col bg-white border border-gray-200 rounded-lg shadow w-80 hover:bg-blue-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                <div class="flex flex-col bg-white border border-gray-200 rounded-lg shadow w-full md:w-80 hover:bg-blue-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                     <div class="flex flex-row space-x-2">
                         {% if a.photo %}
                             <img src="{{ a.photo.url }}" style="width:140px; height:140px" class="w-28 bg-gray-400 rounded-l-lg"/>

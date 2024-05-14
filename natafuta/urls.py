@@ -35,7 +35,7 @@ urlpatterns = [
     path('recherche', recherche, name='recherche'),
     path('login', user_login, name='login'),
     path('signup', signup, name='signup'),
-    path('logout', logout_user, name='logout')
+    path('logout', logout_user, name='logout'),
 ]
 if settings.DEBUG:
     urlpatterns += static(
