@@ -26,7 +26,6 @@ env/
 
 # Ignore les fichiers de médias téléchargés
 media/
-theme/
 *.json
 
 # Ignore les fichiers de données de base de données
