@@ -30,7 +30,7 @@ class Avis(models.Model):
 def resize_image(sender, instance, **kwargs):
     if instance.photo:
         img = Image.open(instance.photo)
-        img.thumbnail((500, 500), Image.ANTIALIAS)
+        img.thumbnail((500, 500), Image.Resampling.LANCZOS)
         img.save(instance.photo.path)
 
 
