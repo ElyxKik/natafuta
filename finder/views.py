@@ -7,12 +7,14 @@ from account.models import AgentUser
 # Create your views here.
 
 def home(request):
+    avis_recherche = Avis.objects.all()
     avis = Avis.objects.filter(is_finded=False).order_by('-created_time')[:3]
-    nombre_avis = avis.count()
+    nombre_avis = avis_recherche.count()
     avis_resolu = Avis.objects.filter(is_finded=True).order_by('-created_time')[:3]
     nombre_avis_resolu = avis_resolu.count()
     agent = AgentUser.objects.all().count()
     return render(request, 'home.html', {'avis':avis, 
+                                         'avis_recherche':avis_recherche,
                                          'nombre_avis':nombre_avis, 
                                          'nombre_avis_resolu':nombre_avis_resolu,
                                          'avis_resolu':avis_resolu,

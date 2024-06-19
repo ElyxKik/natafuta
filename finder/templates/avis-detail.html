@@ -20,7 +20,7 @@
                     <p><span class="font-medium">Sexe</span> : <span class="font-normal text-gray-600">{{avis.sexe}}</span></p>
                     <p><span class="font-medium">Lieu de disparition</span> : <span class="font-normal text-gray-600">{{avis.lieu_disparition}}</span></p>
                     <p><span class="font-medium">Province</span> : <span class="font-normal text-gray-600">{{avis.province}}</span></p>
-                    <p><span class="font-medium">Status</span> : <span class=" text-gray-600 font-medium">{% if avis.is_finded == True %}Retrouvé{% else %}En cours{%endif%}</span></p>
+                    <p><span class="font-medium">Status</span> : <span class=" {% if avis.is_finded == True %}text-green-400{% else %}text-yellow-400{% endif %} font-medium">{% if avis.is_finded == True %}Retrouvé{% else %}En cours{%endif%}</span></p>
                 </div>
                 <div class="my-2">
                     <h6 class="font-medium text-sm">Description : </h6>
