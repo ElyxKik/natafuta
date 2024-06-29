@@ -110,7 +110,7 @@ class AvisViewSet(viewsets.ModelViewSet):
 
         data = {
             'nombre_avis': total_avis,
-            'nombre_retrouvé': avis_retrouves
+            'nombre_retrouve': avis_retrouves
         }
 
         return Response(data)
