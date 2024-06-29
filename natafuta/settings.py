@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'finder',
     'theme',
     'django_browser_reload',
-    'static'
+    'static',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

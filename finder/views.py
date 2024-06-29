@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime
+from rest_framework import viewsets
 
 from finder.models import Avis
 from account.models import AgentUser
+from finder.serializers import AvisSerializer
 
 # Create your views here.
 
@@ -90,3 +92,9 @@ def new_avis(request):
         avis.save()
         return redirect('home')
     
+
+
+
+class AvisViewSet(viewsets.ModelViewSet):
+    queryset = Avis.objects.all()
+    serializer_class = AvisSerializer
