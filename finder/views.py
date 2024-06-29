@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime
 from rest_framework import viewsets
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.decorators import action
 
 from finder.models import Avis
 from account.models import AgentUser
@@ -98,3 +102,15 @@ def new_avis(request):
 class AvisViewSet(viewsets.ModelViewSet):
     queryset = Avis.objects.all()
     serializer_class = AvisSerializer
+
+    @action(detail=False, methods=['get'], url_path='stats')
+    def stats(self, request):
+        total_avis = Avis.objects.count()
+        avis_retrouves = Avis.objects.filter(is_finded=True).count()
+
+        data = {
+            'nombre_avis': total_avis,
+            'nombre_retrouvé': avis_retrouves
+        }
+
+        return Response(data)
