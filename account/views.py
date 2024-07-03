@@ -1,8 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
+from rest_framework import generics, permissions
+from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
+from rest_framework.views import APIView
 
 from account.models import AgentUser
+from account.serializers import UserSerializer, LoginSerializer
 
 
 def user_login(request):
@@ -40,5 +45,27 @@ def logout_user(request):
     return redirect('login')
 
 
-# Create your views here.
+# API Views.
+
+class LoginView(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request, format=None):
+        serializer = LoginSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data
+        login(request, user)
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({"token": token.key, "user": UserSerializer(user).data})
+
+class LogoutView(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def post(self, request, format=None):
+        request.user.auth_token.delete()
+        logout(request)
+        return Response(status=204)
+
+
+
 

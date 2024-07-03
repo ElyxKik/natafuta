@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from finder.views import home, contact, avis_recherche, retrouves, new_avis, avis_detail, personne_retrouve, recherche, mon_compte
-from account.views import user_login, signup, logout_user
+from account.views import user_login, signup, logout_user,LoginView, LogoutView
 from finder.views import AvisViewSet
 from django.conf import settings
 from django.conf.urls.static import static
@@ -42,7 +42,9 @@ urlpatterns = [
     path('login', user_login, name='login'),
     path('signup', signup, name='signup'),
     path('logout', logout_user, name='logout'),
-    path('api/', include(router.urls),)
+    path('api/', include(router.urls),),
+    path('api/login/', LoginView.as_view(), name='login'),
+    path('api/logout/', LogoutView.as_view(), name='logout'),
 ]
 if settings.DEBUG:
     urlpatterns += static(
