@@ -53,10 +53,15 @@ class LoginView(APIView):
     def post(self, request, format=None):
         serializer = LoginSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data
-        login(request, user)
-        token, created = Token.objects.get_or_create(user=user)
-        return Response({"token": token.key, "user": UserSerializer(user).data})
+        username = serializer.validated_data['username']
+        password = serializer.validated_data['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            token, created = Token.objects.get_or_create(user=user)
+            return Response({"token": token.key, "user": UserSerializer(user).data})
+        else:
+            return Response({"error": "Invalid credentials"}, status=400)
 
 class LogoutView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
@@ -64,7 +69,7 @@ class LogoutView(APIView):
     def post(self, request, format=None):
         request.user.auth_token.delete()
         logout(request)
-        return Response(status=204)
+        return Response({"message": "Successfully logged out"}, status=200)
 
 
 
