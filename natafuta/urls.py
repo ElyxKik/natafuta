@@ -43,8 +43,8 @@ urlpatterns = [
     path('signup', signup, name='signup'),
     path('logout', logout_user, name='logout'),
     path('api/', include(router.urls),),
-    path('api/login/', LoginView.as_view(), name='login'),
-    path('api/logout/', LogoutView.as_view(), name='logout'),
+    path('api/login/', LoginView.as_view(), name='login-api'),
+    path('api/logout/', LogoutView.as_view(), name='logout-api'),
 ]
 if settings.DEBUG:
     urlpatterns += static(
