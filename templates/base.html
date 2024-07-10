@@ -18,6 +18,8 @@
             <a href="{% url 'home' %}" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <img src="{% static "img/Logo_min.png" %}" style="width:40px; height: auto;" />
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Natafuta</span>
+                <img src="{% static "img/flag.png" %}" style="width:30px; height: auto;" />
+
             </a>
             <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
                 <span class="sr-only">Open main menu</span>
@@ -36,11 +38,11 @@
                     <li>
                         <a href="{% url 'retrouves' %}" class="block py-2 px-3 {% if request.path == '/personnes-retrouves' %} md:text-blue-700 text-blue-600 {% else %}text-gray-900{% endif %} rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Personnes Retrouvés</a>
                     </li>
+                    {% if user.is_authenticated %}
                     <li>
-                        <a href="#" class="block py-2 px-3 {% if request.path == '/contact' %} md:text-blue-700 text-blue-600 {% else %}text-gray-900{% endif %} rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Camps</a>
+                        <a href="{% url "deplaces" %}" class="block py-2 px-3 {% if request.path == '/contact' %} md:text-blue-700 text-blue-600 {% else %}text-gray-900{% endif %} rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">BDD Deplacés</a>
                     </li>
                     <div class="space-y-2 text-center md:space-y-0 md:flex flex-row md:space-x-2">
-                    {% if user.is_authenticated %}
                     <a href="{% url 'mon_compte' %}">
                         <li>
                             <div class="flex flex-row space-x-2">

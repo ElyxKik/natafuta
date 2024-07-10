@@ -35,3 +35,21 @@ def resize_image(sender, instance, **kwargs):
 
 
 
+
+class Deplace(models.Model):
+    user = models.ForeignKey(AgentUser, on_delete=CASCADE)
+    nom_complet = models.CharField(max_length=255)
+    age = models.IntegerField()
+    origine = models.CharField(max_length=100)
+    province = models.CharField(max_length=100)
+    photo = models.ImageField(upload_to="photo/")
+    sexe = models.CharField(max_length=6)
+    adresse = models.CharField(max_length=255)
+    date = models.DateTimeField(auto_now=True)
+
+@receiver(pre_save, sender=Avis)
+def resize_image(sender, instance, **kwargs):
+    if instance.photo:
+        img = Image.open(instance.photo)
+        img.thumbnail((500, 500), Image.Resampling.LANCZOS)
+        img.save(instance.photo.path)

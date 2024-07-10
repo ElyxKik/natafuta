@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.decorators import action
 
-from finder.models import Avis
+from finder.models import Avis, Deplace
 from account.models import AgentUser
 from finder.serializers import AvisSerializer
 
@@ -95,6 +95,34 @@ def new_avis(request):
                                    )
         avis.save()
         return redirect('home')
+    
+
+
+def deplaces(request):
+    deplaces = Deplace.objects.all()
+    return render(request, 'deplace.html', {'deplaces':deplaces})
+
+def new_deplace(request):
+    user = AgentUser.objects.get(username=request.user)
+    if request.method == 'POST':
+        nom_complet = request.POST.get('nom_complet')
+        age = request.POST.get('age')
+        origine = request.POST.get('origine')
+        province = request.POST.get('province')
+        photo = request.FILES.get('photo')
+        sexe = request.POST.get('sexe')
+        adresse = request.POST.get('adresse')
+        deplace = Deplace.objects.create(user=user,
+                                   nom_complet=nom_complet,
+                                   photo = photo,
+                                   age=age, 
+                                   sexe=sexe,
+                                   origine=origine,
+                                   province=province,
+                                   adresse=adresse,
+                                   )
+        deplace.save()
+        return redirect('deplaces')
     
 
 

@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from finder.views import home, contact, avis_recherche, retrouves, new_avis, avis_detail, personne_retrouve, recherche, mon_compte
+from finder.views import home, contact, avis_recherche, retrouves, new_avis, avis_detail, personne_retrouve, recherche, mon_compte, deplaces, new_deplace
 from account.views import user_login, signup, logout_user,LoginView, LogoutView
 from finder.views import AvisViewSet
 from django.conf import settings
@@ -39,6 +39,8 @@ urlpatterns = [
     path('avis-detail/<int:id>', avis_detail, name='avis_detail'),
     path('compte', mon_compte, name='mon_compte'),
     path('recherche', recherche, name='recherche'),
+    path('new-deplace', new_deplace, name='new_deplace'),
+    path('deplaces', deplaces, name='deplaces'),
     path('login', user_login, name='login'),
     path('signup', signup, name='signup'),
     path('logout', logout_user, name='logout'),
